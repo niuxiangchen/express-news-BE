@@ -1,16 +1,15 @@
 function getCookie(name) {
-    var r = document.cookie.match("\\b" + name + "=([^;]*)\\b");
-    return r ? r[1] : undefined;
+  var r = document.cookie.match("\\b" + name + "=([^;]*)\\b");
+  return r ? r[1] : undefined;
 }
 
-
 $(function () {
-    $(".pic_info").submit(function (e) {
-        e.preventDefault()
+  $(".pic_info").submit(function (e) {
+    e.preventDefault();
 
-        //TODO 上传头像
-        // 上传头像,表单提交和其他提交方式不一样
-        /*
+    //TODO 上传头像
+    // 上传头像,表单提交和其他提交方式不一样
+    /*
         $(this).ajaxSubmit({
             url: "/user/pic_info",
             type: "POST",
@@ -28,5 +27,5 @@ $(function () {
             }
         })
         */
-    })
-})
+  });
+});
