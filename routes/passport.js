@@ -3,6 +3,8 @@ const handleDB = require("../db/handleDB");
 const Captcha = require("../utils/captcha");
 const router = express.Router();
 const moment = require("moment");
+const md5 = require("md5");
+const keys = require("../views/news/keys");
 router.get("/passport/image_code/:float", (req, res) => {
   let captchaObj = new Captcha();
   let captcha = captchaObj.getCode();
@@ -57,7 +59,7 @@ router.post("/passport/register", (req, res) => {
       "数据库插入数据出错",
       {
         username: username,
-        password_hash: password,
+        password_hash: md5(md5(password) + keys.password_salt),
         nick_name: username,
         last_login: moment().format("YYYY-MM-DD hh:mm:ss"),
         // moment(new Date().toLocaleString()).format(
@@ -94,7 +96,7 @@ router.post("/passport/login", (req, res) => {
       return;
     }
     // 4.校验密码是不是正确？ 如果不正确 return
-    if (password !== result[0].password_hash) {
+    if (md5(md5(password) + keys.password_salt) !== result[0].password_hash) {
       res.send({ errsmg: "用户名或者密码不正确，登陆失败" });
       return;
     }

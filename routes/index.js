@@ -1,7 +1,7 @@
 const express = require("express");
 const handleDB = require("../db/handleDB");
 const router = express.Router();
-
+require("../utils/filter");
 router.get("/", (req, res) => {
   (async function () {
     // 访问首页，处理右上角是否登陆展示问题

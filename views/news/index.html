@@ -100,8 +100,10 @@
             </div>
             <ul class="rank_list">
                 {{each newsClick}}
-                <li> 
-                    <span class="first">{{$index+1}}</span><a href="#">{{$value.title}}</a>
+                <li>
+                    <!-- ==0?"first":$index==1?"second":$index==3"third":'' -->
+                    <span class={{$index|classNameFilter}}>{{$index+1}}</span><a
+                        href="#">{{$value.title}}</a>
                 </li>
                 {{/each}}
             </ul>
