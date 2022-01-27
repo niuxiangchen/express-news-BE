@@ -10,6 +10,7 @@ const keys = require("./views/news/keys");
 // 引入各种router对象
 const indexRouter = require("./routes/index");
 const passportRouter = require("./routes/passport");
+const detailRouter = require("./routes/detail");
 
 // function appConfig(){
 // }
@@ -74,6 +75,7 @@ class AppConfig {
     // 注册路由到app下
     this.app.use(common.csrfProtect, indexRouter);
     this.app.use(common.csrfProtect, passportRouter);
+    this.app.use(common.csrfProtect, detailRouter);
   }
 
   // constructor(app){

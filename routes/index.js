@@ -56,21 +56,66 @@ router.get("/", (req, res) => {
   })();
 });
 
-router.get("/get_cookie", (req, res) => {
-  // 测试获取cookie
-  res.send("cookie中name的值为：" + req.cookies["name"]);
-});
-router.get("/get_session", (req, res) => {
-  // 测试获取session
-  res.send("cookie中my_session中的age的值为：" + req.session["age"]);
-});
+router.get("/news_list", (req, res) => {
+  /*处理首页新闻数据列表的请求
+  
+  1、获取参数判空
+  2、查询数据库  info_news   分类id  分页查询  perPage  currentPage
+  3、返回数据给前端
+  */
+  (async function news_list() {
+    // 1、获取参数判空
+    // let {page, cid, per_page} = req.query;
+    let { page = 1, cid = 1, per_page = 5 } = req.query; // 没传就给默认值
 
-router.get("/get_data", (req, res) => {
-  // 测试查询数据库
-  (async function () {
-    let result = await handleDB(res, "info_category", "find", "数据库查询出错");
-    res.send(result);
+    console.log(page, cid, per_page);
+
+    // 2、查询数据库  info_news   分类id  分页查询  perPage  currentPage
+    let wh =
+      cid != 1
+        ? `category_id=${cid} order by create_time desc`
+        : `1 order by create_time desc`;
+    let result3 = await handleDB(
+      res,
+      "info_news",
+      "limit",
+      "info_news数据库查询出错",
+      { where: wh, number: page, count: 5 }
+    );
+
+    // ！！！！！总页数的计算
+    let result4 = await handleDB(
+      res,
+      "info_news",
+      "sql",
+      "info_news数据库查询出错",
+      "select count(*) from info_news where " + wh
+    );
+    let total = result4[0]["count(*)"]; // 记录总条数
+    let totalPage = Math.ceil(total / per_page); // 总页数 = 向上取整(记录总条数/每页条数)
+    console.log(totalPage);
+
+    // 3、返回数据给前端
+    // res.json({newsList:result3})
+    res.json({ newsList: result3, totalPage, currentPage: parseInt(page) });
   })();
 });
+// 以下是测试代码
+// router.get("/get_cookie", (req, res) => {
+//   // 测试获取cookie
+//   res.send("cookie中name的值为：" + req.cookies["name"]);
+// });
+// router.get("/get_session", (req, res) => {
+//   // 测试获取session
+//   res.send("cookie中my_session中的age的值为：" + req.session["age"]);
+// });
+
+// router.get("/get_data", (req, res) => {
+//   // 测试查询数据库
+//   (async function () {
+//     let result = await handleDB(res, "info_category", "find", "数据库查询出错");
+//     res.send(result);
+//   })();
+// });
 
 module.exports = router;

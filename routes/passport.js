@@ -5,6 +5,7 @@ const router = express.Router();
 const moment = require("moment");
 const md5 = require("md5");
 const keys = require("../views/news/keys");
+const jsw = require("jsonwebtoken");
 router.get("/passport/image_code/:float", (req, res) => {
   let captchaObj = new Captcha();
   let captcha = captchaObj.getCode();
@@ -126,5 +127,19 @@ router.post("/passport/logout", (req, res) => {
   // 退出登录实际上是删除session中的user_id
   delete req.session["user_id"];
   res.send({ errmsg: "退出登录成功" });
+});
+// 生成jwttoken 与项目本身无关
+router.get("/passport/token", (req, res) => {
+  const token = jwt.sign({ id: 1, username: "zhangsan" }, keys.jwt_salt, {
+    expiresIn: 60 * 60 * 2,
+  });
+  res.send({
+    errmsg: "success!",
+    errno: "0",
+    reason: "登录请求",
+    result: {
+      token,
+    },
+  });
 });
 module.exports = router;

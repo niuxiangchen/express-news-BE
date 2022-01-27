@@ -10,6 +10,7 @@
     "express": "^4.17.2",
     "express-art-template": "^1.0.1",
     "js-base64": "^3.7.2",
+    "jsonwebtoken": "^8.5.1",
     "md5": "^2.3.0",
     "moment": "^2.29.1",
     "mysql": "^2.18.1",
