@@ -76,6 +76,23 @@ class AppConfig {
     this.app.use(common.csrfProtect, indexRouter);
     this.app.use(common.csrfProtect, passportRouter);
     this.app.use(common.csrfProtect, detailRouter);
+
+    // 在以上路由都找不到的就来到这个页面
+    this.app.use((req, res) => {
+      (async function () {
+        // 在获取登录用户的信息
+        let userInfo = await common.getUser(req, res);
+        let data = {
+          user_info: userInfo[0]
+            ? {
+                nick_name: userInfo[0].nick_name,
+                avatar_url: userInfo[0].avatar_url,
+              }
+            : false,
+        };
+        res.render("news/404", data);
+      })();
+    });
   }
 
   // constructor(app){

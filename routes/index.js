@@ -1,26 +1,13 @@
 const express = require("express");
 const handleDB = require("../db/handleDB");
 const router = express.Router();
+const common = require("../utils/common");
 require("../utils/filter");
 router.get("/", (req, res) => {
   (async function () {
     // 访问首页，处理右上角是否登陆展示问题
     // 判断是否登录
-    // 测试设置cookie和session
-    let user_id = req.session["user_id"];
-    let result = [];
-    if (user_id) {
-      //如果已经获得到user_id,要确认这个user_id是有效的
-      //  result是一个数组
-      result = await handleDB(
-        res,
-        "info_user",
-        "find",
-        "查询数据库出错",
-        `id=${user_id}`
-      );
-      // result[0]就是登陆的那个用户的数据对象
-    }
+    let userInfo = await common.getUser(req, res);
     // ------------------------------------------------
     // 展示首页头部分类信息
     // 查询数据库，查看分类信息？ 查表info_category
@@ -43,10 +30,10 @@ router.get("/", (req, res) => {
     );
     // 可以把用户信息传递到模板中去
     let data = {
-      user_info: result[0]
+      user_info: userInfo[0]
         ? {
-            nick_name: result[0].nick_name,
-            avatar_url: result[0].avatar_url,
+            nick_name: userInfo[0].nick_name,
+            avatar_url: userInfo[0].avatar_url,
           }
         : false,
       category: result2,

@@ -10,11 +10,10 @@
     <script type="text/javascript" src="/news/js/main.js"></script>
     {{block 'scriptBlock'}}{{/block}}
   </head>
-
   <body>
     <div class="header_con">
       <div class="header">
-        <a href="#" class="logo fl"
+        <a href="/" class="logo fl"
           ><img src="/news/images/logo.png" alt="logo"
         /></a>
         {{block 'menuBlock'}}{{/block}} {{if !user_info}}
@@ -26,32 +25,40 @@
         <!-- 用户登录后显示下面，隐藏上面 -->
         <div class="user_login fr">
           <img src="/news/images/person01.png" class="lgin_pic" />
-          <a href="#">{{user_info.nick_name}}</a>
+          <a href="#">{{ user_info.nick_name }}</a>
           <a href="#" onclick="logout()">退出</a>
         </div>
         {{/if}}
       </div>
     </div>
-
+    {{ block 'contentBlock'}}
     <div class="conter_con">
       {{block 'contentLeftBlock'}}{{/block}}
 
       <div class="rank_con fr">
         {{block 'authorCardBlock'}}{{/block}}
+
         <div class="rank_title">
           <h3>点击排行</h3>
         </div>
         <ul class="rank_list">
-          {{each newsClick}}
+          {{ each newsClick}}
+          <!-- <li><span class={{ $index==0?"first":$index==1?"second":$index==2?"third":"" }}>{{$index+1}}</span><a href="#">{{$value.title}}</a></li> -->
           <li>
-            <!-- ==0?"first":$index==1?"second":$index==3"third":'' -->
-            <span class="{{$index|classNameFilter}}">{{$index+1}}</span
+            <span class="{{ $index | classNameFilter }}">{{$index+1}}</span
             ><a href="/news_detail/{{$value.id}}">{{$value.title}}</a>
           </li>
-          {{/each}}
+          {{ /each}}
+          <!-- <li><span class="first">1</span><a href="#">势如破竹！人民币再度连闯四道关口 在岸、离岸双双升破6.42</a></li>
+                <li><span class="second">2</span><a href="#">凛冬已至，还有多少银行人在假装干银行</a></li>
+                <li><span class="third">3</span><a href="#">人民日报：部分城市楼市放松限制引关注，楼市调控不会“拉抽屉”</a></li>
+                <li><span>4</span><a href="#">势如破竹！人民币再度连闯四道关口 在岸、离岸双双升破6.42</a></li>
+                <li><span>5</span><a href="#">凛冬已至，还有多少银行人在假装干银行</a></li>
+                <li><span>6</span><a href="#">人民日报：部分城市楼市放松限制引关注，楼市调控不会“拉抽屉”</a></li> -->
         </ul>
       </div>
     </div>
+    {{ /block }} {{ block 'footerBlock' }}
     <div class="footer">
       <div class="footer_links">
         <a href="">关于我们</a>
@@ -67,7 +74,7 @@
         电话：020-****888 粤ICP备*******8号
       </p>
     </div>
-
+    {{ /block }}
     <!-- 登录表单 -->
     <form class="login_form_con">
       <div class="login_form">

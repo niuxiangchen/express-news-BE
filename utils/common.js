@@ -1,5 +1,5 @@
 // 公共的工具函数（哪一个接口要用都可以直接用）
-
+const handleDB = require("../db/handleDB");
 function getRandomString(n) {
   let str = "";
   while (str.length < n) {
@@ -28,6 +28,27 @@ function csrfProtect(req, res, next) {
   }
 }
 
+async function getUser(req, res) {
+  // 判断是否登录
+  // 测试设置cookie和session
+  let user_id = req.session["user_id"];
+  let result = [];
+  if (user_id) {
+    //如果已经获得到user_id,要确认这个user_id是有效的
+    //  result是一个数组
+    result = await handleDB(
+      res,
+      "info_user",
+      "find",
+      "查询数据库出错",
+      `id=${user_id}`
+    );
+    // result[0]就是登陆的那个用户的数据对象
+  }
+  return result;
+}
+
 module.exports = {
   csrfProtect,
+  getUser,
 };
