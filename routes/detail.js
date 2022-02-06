@@ -263,7 +263,8 @@ router.post("/news_detail/news_comment", (req, res) => {
       user_id: userInfo[0].id,
       news_id,
       content: comment,
-      create_time: new Date().toLocaleString(),
+      create_time: new Date().toLocaleDateString(),
+      // id: 1,
     };
     if (parent_id) {
       //如果传了parent_id,就设置这个属性
@@ -292,7 +293,6 @@ router.post("/news_detail/news_comment", (req, res) => {
       "数据库插入失败",
       commentObj
     );
-
     // 5、返回成功的响应 (传数据给前端到回调函数中，去拼接评论的信息)
     let data = {
       user: {
@@ -304,7 +304,7 @@ router.post("/news_detail/news_comment", (req, res) => {
       content: comment,
       create_time: commentObj.create_time,
       news_id,
-      id: insertResult.id, // 新增加的这条评论的id值
+      id: insertResult.insertId, // 新增加的这条评论的id值
       parent: parent_id
         ? {
             // 传给前端ajax的回调中的拼接结果
