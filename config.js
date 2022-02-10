@@ -11,6 +11,7 @@ const keys = require("./views/news/keys");
 const indexRouter = require("./routes/index");
 const passportRouter = require("./routes/passport");
 const detailRouter = require("./routes/detail");
+const profileRouter = require("./routes/profile");
 
 // function appConfig(){
 // }
@@ -76,7 +77,7 @@ class AppConfig {
     this.app.use(common.csrfProtect, indexRouter);
     this.app.use(common.csrfProtect, passportRouter);
     this.app.use(common.csrfProtect, detailRouter);
-
+    this.app.use(common.csrfProtect, profileRouter);
     // 在以上路由都找不到的就来到这个页面
     this.app.use((req, res) => {
       (async function () {
