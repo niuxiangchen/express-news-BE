@@ -13,7 +13,7 @@ node和原生js项目
 - 实现模块：注册、登录、首页新闻数据展示模块，滑动到底部加载更多、点击排行、基页模板的抽取与模板继承、详情页数据展示、用户收藏新闻、用户评论模块、回复评论模块、新闻作者数据展示、用户关注模块、个人中心模块(修改基本资料、密码、用户头像)等。
 
 项目截图：
-![](https://github.com/niuxiangchen/node-js-news/blob/master/screenshot/node%E6%96%B0%E9%97%BB1.png)
+![](https://github.com/niuxiangchen/node-js-news/blob/master/screenshot/news1.png)
 ![](https://github.com/niuxiangchen/node-js-news/blob/master/screenshot/node%E6%96%B0%E9%97%BB2.png)
 ![](https://github.com/niuxiangchen/node-js-news/blob/master/screenshot/node%E6%96%B0%E9%97%BB3.png)
 ![](https://github.com/niuxiangchen/node-js-news/blob/master/screenshot/node%E6%96%B0%E9%97%BB4.png)
