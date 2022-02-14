@@ -6,7 +6,7 @@
 {{block 'menuBlock'}}
 <ul class="menu fl">
     {{ each category}}
-        <li data-cid={{$index+1}} class={{ $index==0?"active":"" }}><a href="javascript:;">{{ $value.name }}</a></li>
+    <li data-cid={{$index+1}} class={{ $index==0?"active":"" }}><a href="javascript:;">{{ $value.name }}</a></li>
     {{ /each}}
 </ul>
 
@@ -14,7 +14,7 @@
 
 {{block 'contentLeftBlock'}}
 <ul class="list_con fl">
-   
+
 </ul>
 {{/block}}
 

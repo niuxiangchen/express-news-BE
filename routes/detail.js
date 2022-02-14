@@ -97,7 +97,7 @@ router.get("/news_detail/:news_id", (req, res) => {
       commentResult[i].commenter = {
         nick_name: commenterResult[0].nick_name,
         avatar_url: commenterResult[0].avatar_url
-          ? commenterResult[0].avatar_url
+          ? constant.QINIU_AVATAR_URL_PRE + commenterResult[0].avatar_url
           : "/news/images/worm.jpg",
       };
 
@@ -204,6 +204,11 @@ router.get("/news_detail/:news_id", (req, res) => {
         ? false
         : true
       : true;
+
+    //作者的头相设置
+    authorInfo[0].avatar_url = authorInfo[0].avatar_url
+      ? constant.QINIU_AVATAR_URL_PRE + authorInfo[0].avatar_url
+      : "/news/images/worm.jpg";
 
     // 传到模板中去的数据
     let data = {
@@ -347,7 +352,7 @@ router.post("/news_detail/news_comment", (req, res) => {
       user_id: userInfo[0].id,
       news_id,
       content: comment,
-      create_time: new Date().toLocaleString(),
+      create_time: new Date().toLocaleDateString(),
     };
     if (parent_id) {
       //如果传了parent_id,就设置这个属性
@@ -381,7 +386,7 @@ router.post("/news_detail/news_comment", (req, res) => {
     let data = {
       user: {
         avatar_url: userInfo[0].avatar_url
-          ? userInfo[0].avatar_url
+          ? constant.QINIU_AVATAR_URL_PRE + userInfo[0].avatar_url
           : "/news/images/worm.jpg",
         nick_name: userInfo[0].nick_name,
       },

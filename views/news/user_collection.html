@@ -1,41 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>用户中心</title>
-	<link rel="stylesheet" type="text/css" href="../css/reset.css">
-    <link rel="stylesheet" type="text/css" href="../css/jquery.pagination.css">
-    <link rel="stylesheet" type="text/css" href="../css/main.css">
-    <script type="text/javascript" src="../js/jquery-1.12.4.min.js"></script>
-	<script type="text/javascript" src="../js/jquery.pagination.min.js"></script>
-</head>
-<body class="inframe_body">
+  <head>
+    <meta charset="UTF-8" />
+    <title>用户中心</title>
+    <link rel="stylesheet" type="text/css" href="/news/css/reset.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/news/css/jquery.pagination.css"
+    />
+    <link rel="stylesheet" type="text/css" href="/news/css/main.css" />
+    <script type="text/javascript" src="/news/js/jquery-1.12.4.min.js"></script>
+    <script
+      type="text/javascript"
+      src="/news/js/jquery.pagination.min.js"
+    ></script>
+  </head>
+  <body class="inframe_body">
     <div class="my_collect">
-        <h3>我的收藏</h3>
-        <ul class="article_list">
-            <li><a href="#">智能音箱“不智能”：这次轮到三星语音助手Bixby被吐槽了</a><span>2018-1-17</span></li>
-            <li><a href="#">智能音箱“不智能”：这次轮到三星语音助手Bixby被吐槽了</a><span>2018-1-17</span></li>
-            <li><a href="#">智能音箱“不智能”：这次轮到三星语音助手Bixby被吐槽了</a><span>2018-1-17</span></li>
-            <li><a href="#">智能音箱“不智能”：这次轮到三星语音助手Bixby被吐槽了</a><span>2018-1-17</span></li>
-            <li><a href="#">智能音箱“不智能”：这次轮到三星语音助手Bixby被吐槽了</a><span>2018-1-17</span></li>
-            <li><a href="#">智能音箱“不智能”：这次轮到三星语音助手Bixby被吐槽了</a><span>2018-1-17</span></li>
-        </ul>
+      <h3>我的收藏</h3>
+      <ul class="article_list">
+        {{each collectionNewsList}}
+        <li>
+          <a href="#">{{$value.title}}</a
+          ><span>{{$value.create_time | dateFormat}}</span>
+        </li>
+        {{/each}}
+      </ul>
 
+      <div style="display: none" class="currentPage">{{currentPage}}</div>
+      <div style="display: none" class="totalPage">{{totalPage}}</div>
 
+      <div id="pagination" class="page"></div>
+      <script>
+        $(function () {
+          $("#pagination").pagination({
+            currentPage: Number($(".currentPage").html()),
+            totalPage: Number($(".totalPage").html()),
+            callback: function (current) {
+              // 点击 分页按钮的时候，来执行callback这里的代码
+              // alert('ok!'+current);  // current表示想要获取哪一页的数据
 
-        <div id="pagination" class="page"></div>
-        <script>
-            $(function() {
-                $("#pagination").pagination({
-                    currentPage: 2,
-                    totalPage: 3,
-                    callback: function(current) {
-                        alert('ok!');
-                    }
-                });
-            });
-        </script>
-
+              // 点击发起get请求，第current页的数据
+              location.href =
+                "http://localhost:3003/user/collections?p=" + current;
+            },
+          });
+        });
+      </script>
     </div>
-</body>
+  </body>
 </html>

@@ -3,6 +3,7 @@ const handleDB = require("../db/handleDB");
 const router = express.Router();
 const common = require("../utils/common");
 require("../utils/filter");
+const { QINIU_AVATAR_URL_PRE } = require("../utils/constant");
 router.get("/", (req, res) => {
   (async function () {
     // 访问首页，处理右上角是否登陆展示问题
@@ -33,7 +34,9 @@ router.get("/", (req, res) => {
       user_info: userInfo[0]
         ? {
             nick_name: userInfo[0].nick_name,
-            avatar_url: userInfo[0].avatar_url,
+            avatar_url: userInfo[0].avatar_url
+              ? QINIU_AVATAR_URL_PRE + userInfo[0].avatar_url
+              : "/news/images/worm.jpg",
           }
         : false,
       category: result2,

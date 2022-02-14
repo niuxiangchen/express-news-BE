@@ -28,7 +28,7 @@ $(function () {
             "nick_name": nick_name,
             "gender": gender
         }
-        /*
+        
         $.ajax({
             url: "/user/base_info",
             type: "post",
@@ -40,14 +40,14 @@ $(function () {
             success: function (resp) {
                 if (resp.errno == "0") {
                     // 更新父窗口内容
-                    $('.user_center_name', parent.document).news(params['nick_name'])
-                    $('#nick_name', parent.document).news(params['nick_name'])
+                    $('.user_center_name', parent.document).html(params['nick_name'])
+                    $('#nick_name', parent.document).html(params['nick_name'])
                     $('.input_sub').blur()
                 }else {
                     alert(resp.errmsg)
                 }
             }
         })
-        */
+        
     })
 })

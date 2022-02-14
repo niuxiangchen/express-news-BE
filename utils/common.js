@@ -28,6 +28,7 @@ function csrfProtect(req, res, next) {
   }
 }
 
+//获取登录用户的信息，但是可能获取不上，因为用户可能没有登录
 async function getUser(req, res) {
   // 判断是否登录
   // 测试设置cookie和session
@@ -48,7 +49,18 @@ async function getUser(req, res) {
   return result;
 }
 
+//获取登录用户的信息，一定可以获取到
+async function getUserInfo(req, res) {
+  let userInfo = await getUser(req, res);
+  if (!userInfo[0]) {
+    //  没有登录就跳转到首页去
+    res.redirect("/");
+  }
+  return userInfo;
+}
+
 module.exports = {
   csrfProtect,
   getUser,
+  getUserInfo,
 };

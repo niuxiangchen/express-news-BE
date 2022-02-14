@@ -98,7 +98,7 @@ router.post("/passport/login", (req, res) => {
     }
     // 4.校验密码是不是正确？ 如果不正确 return
     if (md5(md5(password) + keys.password_salt) !== result[0].password_hash) {
-      res.send({ errsmg: "用户名或者密码不正确，登陆失败" });
+      res.send({ errmsg: "用户名或者密码不正确，登陆失败" });
       return;
     }
     // 5.保持用户登录状态
