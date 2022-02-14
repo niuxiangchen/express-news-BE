@@ -14,6 +14,6 @@ node和原生js项目
 
 项目截图：
 ![](https://github.com/niuxiangchen/node-js-news/blob/master/screenshot/news1.png)
-![](https://github.com/niuxiangchen/node-js-news/blob/master/screenshot/node%E6%96%B0%E9%97%BB2.png)
-![](https://github.com/niuxiangchen/node-js-news/blob/master/screenshot/node%E6%96%B0%E9%97%BB3.png)
-![](https://github.com/niuxiangchen/node-js-news/blob/master/screenshot/node%E6%96%B0%E9%97%BB4.png)
+![](https://github.com/niuxiangchen/node-js-news/blob/master/screenshot/news2.png)
+![](https://github.com/niuxiangchen/node-js-news/blob/master/screenshot/news3.png)
+![](https://github.com/niuxiangchen/node-js-news/blob/master/screenshot/news4.png)
