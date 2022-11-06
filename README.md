@@ -11,6 +11,7 @@ node和原生js项目
 - 界面局部刷新使用 ajax 请求接口
 - 实现模块：注册、登录、首页新闻数据展示模块，滑动到底部加载更多、点击排行、基页模板的抽取与模板继承、详情页数据展示、用户收藏新闻、用户评论模块、回复评论模块、新闻作者数据展示、用户关注模块、个人中心模块(修改基本资料、密码、用户头像)等。
 项目截图：    
+
 ![image](https://github.com/niuxiangchen/express-news-BE/tree/ba27b91199800887d15c2d298e06f5453be5dc6e/screenshot/news1.png)
 ![image](https://github.com/niuxiangchen/express-news-BE/blob/ba27b91199800887d15c2d298e06f5453be5dc6e/screenshot/news2.png)
 ![image](https://github.com/niuxiangchen/express-news-BE/blob/ba27b91199800887d15c2d298e06f5453be5dc6e/screenshot/news3.png)
